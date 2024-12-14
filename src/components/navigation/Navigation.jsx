@@ -10,7 +10,7 @@ function Navigation() {
                 <NavLink className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'} to='/'>Home</NavLink>
             </li>
             <li>
-                <NavLink className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'} to='/overview'>Alle posts</NavLink>
+                <NavLink className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'} to='/posts'>Alle posts</NavLink>
             </li>
             <li>
                 <NavLink className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'} to='/post'>Nieuwe post</NavLink>
