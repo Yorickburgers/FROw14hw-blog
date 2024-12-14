@@ -11,7 +11,7 @@ import Posted from "./pages/posted/Posted.jsx";
 function App() {
     return (
         <div className="page-container">
-            <img src={logo} alt="Company logo"/>
+
             <Navigation />
             <Routes>
                 <Route path="/" element={<Home />} />

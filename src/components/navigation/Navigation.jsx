@@ -5,6 +5,9 @@ import {NavLink} from "react-router-dom";
 function Navigation() {
     return (
         <nav>
+            <span>
+                <img src="../../../src/assets/logo-medium.png" alt="logo of BlOgventure"/>
+            </span>
         <ul>
             <li>
                 <NavLink className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'} to='/'>Home</NavLink>
