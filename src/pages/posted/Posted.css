@@ -17,3 +17,8 @@ a:visited {
 a:hover {
     color: white;
 }
+
+.deleteButton {
+    background-color: red;
+    color: white;
+}

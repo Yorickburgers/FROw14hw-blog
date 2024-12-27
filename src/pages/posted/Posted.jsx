@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 // import posts from '../../constants/data.json'
 import "./Posted.css"
 import axios from "axios";
@@ -7,11 +7,21 @@ import axios from "axios";
 function Posted() {
     const { postId } = useParams();
     const [ blogpost, setBlogpost] = useState({})
+    const navigate = useNavigate();
 
     async function fetchPost() {
         try {
             const response = await axios.get(`http://localhost:3000/posts/${postId}`);
             setBlogpost(response.data);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function deletePost() {
+        try {
+            await axios.delete(`http://localhost:3000/posts/${postId}`);
+            navigate("/posts");
         } catch (e) {
             console.error(e);
         }
@@ -44,6 +54,8 @@ function Posted() {
                 <p>{blogpost.comments} reacties - {blogpost.shares} keer gedeeld</p>
 
                 <p><Link to="/posts">Terug naar de overzichtspagina</Link></p>
+
+                <button type="button" className="deleteButton" onClick={deletePost}>Verwijder Post</button>
             </div>
         ) : (
             <div className="posted-container">
