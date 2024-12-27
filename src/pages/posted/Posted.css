@@ -1,0 +1,24 @@
+.posted-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    border: 1px solid #38E991;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px;
+}
+
+a,
+a:visited {
+    text-decoration: none;
+    color: #38E991;
+}
+
+a:hover {
+    color: white;
+}
+
+.deleteButton {
+    background-color: red;
+    color: white;
+}

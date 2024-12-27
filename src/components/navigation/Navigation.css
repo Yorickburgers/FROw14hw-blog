@@ -1,0 +1,46 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+    height: 40px;
+    max-width: 1200px;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    justify-content: space-around;
+    list-style: none;
+    color: white;
+}
+
+.active-menu-link {
+    text-decoration: none;
+    border-bottom: 1px solid white;
+}
+
+.default-menu.link {
+    text-decoration: none;
+    color: white;
+    border-bottom: 1px solid transparent;
+}
+
+a,
+a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+span {
+    height: 100%;
+    width: 50%;
+}
+
+img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
