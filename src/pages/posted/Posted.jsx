@@ -1,32 +1,58 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
-import posts from '../../constants/data.json'
+// import posts from '../../constants/data.json'
 import "./Posted.css"
+import axios from "axios";
 
 function Posted() {
     const { postId } = useParams();
-    const post = posts[postId-1]
+    const [ blogpost, setBlogpost] = useState({})
 
-    const formattedDateNL = new Intl.DateTimeFormat('nl-NL', {
+    async function fetchPost() {
+        try {
+            const response = await axios.get(`http://localhost:3000/posts/${postId}`);
+            setBlogpost(response.data);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    useEffect(() => {
+        fetchPost();
+        }, [postId]);
+
+
+    const formattedDateNL = blogpost.created
+        ? new Intl.DateTimeFormat('nl-NL', {
         day: '2-digit',
         month: 'long',
         year: 'numeric',
-    }).format(new Date(post.created));
+    }).format(new Date(blogpost.created))
+    : "Onbekende datum";
 
     return (
-        <div className="posted-container">
-            <h1>{post.title} ({post.readTime} minuten)</h1>
-            <h2>{post.subtitle}</h2>
+        <>
+        {blogpost?.title ? (
+            <div className="posted-container">
+                <h1>{blogpost.title} ({blogpost.readTime} minuten)</h1>
+                <h2>{blogpost.subtitle}</h2>
 
-            <p>Geschreven door {post.author} op {formattedDateNL}</p>
+                <p>Geschreven door {blogpost.author} op {formattedDateNL}</p>
 
-            <p>{post.content}</p>
+                <p>{blogpost.content}</p>
 
-            <p>{post.comments} reacties - {post.shares} keer gedeeld</p>
+                <p>{blogpost.comments} reacties - {blogpost.shares} keer gedeeld</p>
 
-            <p><Link to="/posts">Terug naar de overzichtspagina</Link></p>
-        </div>
-    );
+                <p><Link to="/posts">Terug naar de overzichtspagina</Link></p>
+            </div>
+        ) : (
+            <div className="posted-container">
+                <h3>Deze blogpost bestaat niet, of er is iets misgegaan bij het ophalen van de blogpost. Probeer het opnieuw.</h3>
+                <p><Link to="/posts">Terug naar de overzichtspagina</Link></p>
+            </div>
+        )}
+            </>
+            );
 }
 
 export default Posted;
